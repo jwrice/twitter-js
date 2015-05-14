@@ -17,3 +17,7 @@ app.get('/', function (req, res) {
 app.get('/news', function (req, res) {
   res.send('Nothing to report');
 });
+
+app.get('/change' function(req, res){
+	res.send('I made a change.')
+})

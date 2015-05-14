@@ -2,9 +2,12 @@ var express = require( 'express' );
 var app = express();
 var morgan = require('morgan')
 var swig = require('swig')
+var routes = require('./routes/');
 
+//registers it as middleware for all routes beginning with /
 app.use(morgan('dev'))
-
+app.use('/', routes);
+app.use(express.static(__dirname + '/public'));
 var server = app.listen(3000, function () {
   var host = server.address().address;
   var port = server.address().port;
@@ -20,19 +23,10 @@ app.set('views', __dirname + '/views')
 swig.setDefaults({ cache: false })
 //caching saves the doc, and only rerenders if data has changed. important in production, but gets in the way for testing. turn this off
 
-
+// app.get('/', function (req, res) {
+//   var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
+//   res.render( 'index', {title: 'Hall of Fame', people: people} );
+// });
 
 //passes index.html to Express' view engine (Swig). Swig uses data object to populate variables in the template, looping through people. Express then sends HTML doc as response to browser
 
-app.get('/', function (req, res) {
-  var people = [{name: 'Full'}, {name: 'Stacker'}, {name: 'Son'}];
-  res.render( 'index', {title: 'Hall of Fame', people: people} );
-});
-
-// app.get('/news', function (req, res) {
-//   res.send('Nothing to report');
-// });
-
-// app.get('/change' function(req, res){
-// 	res.send('I made a change.')
-// })

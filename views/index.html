@@ -3,19 +3,30 @@
 {% block content %}
   
   <div class="page-header">
-    <h1>Welcome to Twitter.js, Nimit!</h1>
+    <h1>{{title}}</h1>
   </div>
   <div class="row">
     <div class="col-md-3">
+      <center>
       <img src="https://pbs.twimg.com/profile_images/2450268678/olxp11gnt09no2y2wpsh_normal.jpeg"><br>
       <b>Your Name</b><br>
       100 followers
+    </center>
     </div>
     <div class="col-md-9">
-    
+    <h2><center>All Tweets</center></h2>
       <!-- display tweets here -->
       {% for tweet in tweets %}
-        <li>{{tweet.text}}</li>
+      <div class="row bottom5">
+      <div class="col-sm-2" ></div>
+        <div class="col-sm-8">
+          <a href="/users/{{tweet.name}}">
+            {{tweet.name}}</a>
+            <br>
+          <a href="/users/{{tweet.name}}/tweets/{{tweet.id}}">
+            {{tweet.text}}</a>
+        </div>
+      </div>
       {% endfor %}
       
     </div>
